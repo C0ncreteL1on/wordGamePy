@@ -15,12 +15,14 @@ match = {
   "match_type": "",
   "match_rounds": "",
   "words_per_round": "",
+  "player_count": 0,
 }
 
 def set_player(player):
   player_and_points[player] = 0
   player_and_words[player] = []
   print(f"{player} Joined")
+  match["player_count"] += 1
 
 # Word points function
 def score_word(word):
@@ -65,9 +67,10 @@ while True:
   print("==============================================")
 
   player = str(input("Type player name ('done' to continue): "))
-  if player.lower() == "done":
+  if player.lower() == "done" and match["player_count"] != 0:
     break
-  set_player(player)
+  elif player.lower() != "done":
+    set_player(player)
 
 # Setting Match Settings
 while True: #Match Type
