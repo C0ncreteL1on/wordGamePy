@@ -18,13 +18,14 @@ match = {
   "player_count": 0,
 }
 
+# Function that adds player to match dictionary and player and points and words dict
 def set_player(player):
   player_and_points[player] = 0
   player_and_words[player] = []
   print(f"{player} Joined")
   match["player_count"] += 1
 
-# Word points function
+# Word points function (Calculates the score of a word)
 def score_word(word):
   point_total = 0
   for letter in word:
@@ -32,7 +33,7 @@ def score_word(word):
       point_total += letter_to_points[letter.upper()]
   return point_total
 
-# Add Word Player
+# Add Word Player (Adds word to the player and words dict)
 def add_word(player, word):
     if player not in player_and_words:
         player_and_words[player] = []
@@ -140,10 +141,12 @@ for round in range(match["match_rounds"]):
     for player in player_and_points.keys():
       while True:
         word = input(f"{player}, type your word: ")
-        if word not in words_used:
+        if word not in words_used and word.isalpha():
           words_used.append(word)
           add_word(player, word)
           break
+        elif not word.isalpha():
+            print("Please enter alphabetic characters only.")
         else:
           print(f"{word} was already used")
 print("\n==============================================")
@@ -152,3 +155,4 @@ print("                 Final Ranking:")
 show_ranking()
 print("")
 print("==============================================")
+
